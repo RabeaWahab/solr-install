@@ -9,6 +9,9 @@
     
  + Now visit `http://localhost:8983/solr`
 
+##Magento Notes
+ + Type the absolute path of Magento without a traling slash at the end.
+
 ##Notes
 In __Redhat Enterprise Linux__ you *cannot execute from /tmp because /tmp is mounted as noexec*.
 On attempt it gives you the following error: "bad interpreter: Permission denied", so cloned and executed it somewhere else.
