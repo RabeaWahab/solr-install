@@ -1,7 +1,11 @@
 #!/bin/bash -e
 # -e: Exit immediately if a command exits with a non-zero status.
 
+# get the Magento directory 
+echo "Please enter your Magento installation absolute path (/var/www/path/to/magento):"
+read MAGENTO_PATH
 # Install dependencies depending of the distribution family
+
 echo "Download dependencies"
 
 if which yum &> /dev/null; then
@@ -73,5 +77,22 @@ sudo chown -R jetty:jetty $JETTY_HOME
 echo "Clean up"
 sudo rm -R $TMP/apache-solr-3.6.2/
 
+echo "Checking if Magento directory exists --> $MAGENTO_PATH"
+if [ -d "$MAGENTO_PATH" ]; then
+	echo "Copying SOLR conf files from Magento"
+	sudo cp -R $MAGENTO_PATH/lib/Apache/Solr/conf/* $JETTY_HOME/solr/conf/
+fi
+
+if [ ! -d "$MAGENTO_PATH" ]; then
+	echo "Your Magento path is not correct, please copy the files from MAGENTO_PATH/lib/Apache/Solr/conf/ to $JETTY_HOME/solr/conf/"
+fi
+
+
 echo "Finish"
+echo ""
+echo ""
 echo "For launch Jetty and Solr, run the command java -jar start.jar in the directory $JETTY_HOME"
+echo "Jetty will listen on 8983 port, solr will be under your local machine at: http://localhost:8983/solr/"
+echo "Magento indexer has to run once SOLR is enabled in your Magento admin panel configuration"
+echo "You can run it from your Magento installation: php shell/indexer.php --reindex catalogsearch_fulltext"
+
