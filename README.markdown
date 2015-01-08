@@ -10,7 +10,7 @@
  + Now visit `http://localhost:8983/solr`
 
 ##Magento Notes
- + Type the absolute path of Magento without a traling slash at the end.
+ + When asked for the location of your Magento installation; Type the absolute path of without a traling slash at the end.
 
 ##Notes
 In __Redhat Enterprise Linux__ you *cannot execute from /tmp because /tmp is mounted as noexec*.
